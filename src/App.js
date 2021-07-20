@@ -8,6 +8,7 @@ function App() {
   return (
     <HashRouter>
       <Header />
+
       <Switch>
         <Route path="/upload">
           <Upload />
