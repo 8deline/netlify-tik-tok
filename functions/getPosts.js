@@ -26,6 +26,7 @@ exports.handler = async () => {
   const response_body = await response.json();
   try {
     if (response_body) {
+      console.log(response_body);
       return {
         statusCode: 200,
         body: JSON.stringify(response_body),
