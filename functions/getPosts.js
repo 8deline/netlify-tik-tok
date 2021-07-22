@@ -7,6 +7,7 @@ exports.handler = async () => {
     {
         posts {
           values {
+            id
             avatar
             username
             comments

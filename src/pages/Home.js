@@ -17,7 +17,7 @@ const Home = () => {
       {posts &&
         posts.map((post) => (
           <div key={post.id}>
-            <p>{post.avatar}</p>
+            <img src={post.avatar} alt="avatar" width="40" />
             <p>{post.username}</p>
           </div>
         ))}
