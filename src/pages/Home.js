@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import { useState, useEffect } from "react";
 import FollowersColumn from "../components/FollowersColumn";
+import Card from "../components/Card";
 
 const Home = () => {
   let [posts, setPosts] = useState(null);
@@ -16,7 +17,8 @@ const Home = () => {
   return (
     <div>
       <FollowersColumn />
-      <div className="feed">
+      {posts && posts.map((post) => <Card post={post} />)}
+      {/* <div className="feed">
         {posts &&
           posts.map((post) => (
             <div key={post.id}>
@@ -25,11 +27,12 @@ const Home = () => {
               <video width="320" height="240" controls>
                 <source src={post.video_posts} type="video/mp4" />
               </video>
-              <p>{posts.likes}</p>
-              <p>{posts.comments}</p>
+              <p>{post.likes}</p>
+              <p>{post.comments.length}</p>
+              <p>{post.date_posted}</p>
             </div>
           ))}
-      </div>
+      </div> */}
       <div className="suggested-box"></div>
     </div>
   );

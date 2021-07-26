@@ -13,6 +13,10 @@ exports.handler = async () => {
             comments
             likes
             video_posts
+            comments_list
+            likes_int
+            date_posted
+            isFollowed
           }
         }
       }`;
