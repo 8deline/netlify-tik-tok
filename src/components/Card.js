@@ -22,7 +22,7 @@ const Card = ({ post }) => {
               {/* <p className="username">{user.name}</p> */}
               <p>{post.date_posted}</p>
             </div>
-            <p>{post.caption}</p>
+            <p>{post.comments}</p>
           </div>
         </div>
         <div
@@ -46,8 +46,9 @@ const Card = ({ post }) => {
       <div className="section socials">
         <i class="far fa-heart"></i>
         <div className="social-tag">{post.likes}</div>
-        <i class="far fa-comment-dots"></i>
-        <div className="social-tag">{post.comments}</div>
+        {/* <i class="far fa-comment-dots"></i> */}
+        <i class="far fa-comments"></i>
+        <div className="social-tag">{post.comments_list.length}</div>
         <i class="far fa-share-square"></i>
       </div>
     </div>
