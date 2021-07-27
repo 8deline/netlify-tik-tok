@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div>
       <FollowersColumn />
-      {posts && posts.map((post) => <Card post={post} />)}
+      {posts && posts.map((post) => <Card key={post.id} post={post} />)}
       {/* <div className="feed">
         {posts &&
           posts.map((post) => (

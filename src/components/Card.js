@@ -1,12 +1,28 @@
+import fetch from "node-fetch";
 import React from "react";
 import "../App.css";
+import { useState, useEffect } from "react";
 
 const Card = ({ post }) => {
-  // const timestamp = user.timestamp;
-  // const timeStampReformat = timestamp.slice(2, 7);
+  let [test, setTest] = useState(null);
+  // // const timestamp = user.timestamp;
+  // // const timeStampReformat = timestamp.slice(2, 7);
+  let putData = async () => {
+    let request = await fetch(".netlify/functions/follow");
+    let requestBody = await request.json();
+    console.log(requestBody);
+    console.log(requestBody);
+    setTest(requestBody);
+  };
+
+  useEffect(() => {
+    putData();
+  }, []);
 
   return (
     <div className="card">
+      {test && <p>{JSON.stringify(test.isFollowed)}</p>}
+
       <div className="break" />
       <div className="section">
         <div className="user-info">
