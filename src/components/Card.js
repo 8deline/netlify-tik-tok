@@ -25,18 +25,24 @@ const Card = ({ post }) => {
             <p>{post.caption}</p>
           </div>
         </div>
-        {post.isFollowed && (
-          <div
-            className={post.isFollowed ? "followed-button" : "follow-button"}
-            // onClick={() => toggleFollow(user)}
-          >
-            {post.isFollowed ? "Following" : "Follow"}
-          </div>
-        )}
+        <div
+          className={post.isFollowed ? "followed-button" : "follow-button"}
+          // onClick={() => toggleFollow(user)}
+        >
+          {post.isFollowed ? "Following" : "Follow"}
+        </div>
       </div>
+      {/* <div className="video-container"> */}
       <video className="video" controls>
         <source src={post.video_posts} type="video/mp4" />
       </video>
+      {/* <iframe
+          className="iframe"
+          title="post"
+          src={post.video_posts + "/embed"}
+        ></iframe> */}
+      {/* </div> */}
+
       <div className="section socials">
         <i class="far fa-heart"></i>
         <div className="social-tag">{post.likes}</div>
