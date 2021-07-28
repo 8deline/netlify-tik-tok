@@ -8,7 +8,6 @@ const Home = () => {
   const fetchData = async () => {
     const response = await fetch(".netlify/functions/getPosts");
     let response_body = await response.json();
-    console.log(response_body.data.posts.values);
     setPosts(response_body.data.posts.values);
   };
 

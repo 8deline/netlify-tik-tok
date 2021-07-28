@@ -4,25 +4,40 @@ import "../App.css";
 import { useState, useEffect } from "react";
 
 const Card = ({ post }) => {
-  let [test, setTest] = useState(null);
+  // let [putResponse, setPutResponse] = useState(null);
+  let [following, setFollowing] = useState(post.isFollowed);
+  // console.log(post.isFollowed);
+
   // // const timestamp = user.timestamp;
   // // const timeStampReformat = timestamp.slice(2, 7);
+
   let putData = async () => {
-    let request = await fetch(".netlify/functions/follow");
+    let request = await fetch(".netlify/functions/follow", {
+      method: "post",
+      body: JSON.stringify({
+        id: post.id,
+        date_posted: post.date_posted,
+        isFollowed: following,
+      }),
+    });
     let requestBody = await request.json();
     console.log(requestBody);
-    console.log(requestBody);
-    setTest(requestBody);
+    // setPutResponse(requestBody);
+    // setFollowing(!following);
   };
+  // let toggleFollow = (followState) => {
+  //   if (followState) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
-  useEffect(() => {
-    putData();
-  }, []);
+  // useEffect(() => {
+  //   toggleFollow();
+  // }, []);
 
   return (
     <div className="card">
-      {test && <p>{JSON.stringify(test.isFollowed)}</p>}
-
       <div className="break" />
       <div className="section">
         <div className="user-info">
@@ -42,10 +57,15 @@ const Card = ({ post }) => {
           </div>
         </div>
         <div
-          className={post.isFollowed ? "followed-button" : "follow-button"}
-          // onClick={() => toggleFollow(user)}
+          className={following ? "followed-button" : "follow-button"}
+          onClick={() => {
+            // console.log(following);
+            setFollowing((prev) => !prev);
+            // console.log(following);
+            putData();
+          }}
         >
-          {post.isFollowed ? "Following" : "Follow"}
+          {following ? "Following" : "Follow"}
         </div>
       </div>
       {/* <div className="video-container"> */}

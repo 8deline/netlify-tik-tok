@@ -1,12 +1,18 @@
 const { default: fetch } = require("node-fetch");
 
-exports.handler = async () => {
+exports.handler = async (event) => {
+  console.log(event.body);
+  let jsonBody = JSON.parse(event.body);
+  let currentId = jsonBody.id;
+  let date_posted = jsonBody.date_posted;
+  let newFollowStatus = jsonBody.isFollowed;
+
   let query = `mutation {
               updateposts(value:{id:${JSON.stringify(
-                0
+                currentId
               )}, datedx20_posted:${JSON.stringify(
-    "2020-02-01"
-  )}, isFollowed:${JSON.stringify(false)}})
+    date_posted
+  )}, isFollowed:${JSON.stringify(newFollowStatus)}})
              {
               value {
                 id
@@ -22,8 +28,8 @@ exports.handler = async () => {
     },
   });
   const requestBody = await request.json();
-  console.log(requestBody);
-  console.log(requestBody.data.updateposts.value);
+  // console.log(requestBody);
+  // console.log(requestBody.data.updateposts.value);
   return {
     statusCode: 200,
     body: JSON.stringify(requestBody.data.updateposts.value),

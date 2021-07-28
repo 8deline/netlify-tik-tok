@@ -31,7 +31,7 @@ exports.handler = async () => {
   const response_body = await response.json();
   try {
     if (response_body) {
-      console.log(response_body);
+      // console.log(response_body);
       return {
         statusCode: 200,
         body: JSON.stringify(response_body),
@@ -43,7 +43,4 @@ exports.handler = async () => {
       body: JSON.stringify(e),
     };
   }
-  console.log("test function");
-  console.log(response_body);
 };
-console.log("test function");
