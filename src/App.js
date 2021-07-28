@@ -11,7 +11,6 @@ function App() {
       <Header />
 
       <Switch>
-        {/* <Route path="/.netlify/functions/getPosts" /> */}
         <Route path="/upload">
           <Upload />
         </Route>
