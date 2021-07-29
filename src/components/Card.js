@@ -3,7 +3,7 @@ import React from "react";
 import "../App.css";
 import { useState, useEffect } from "react";
 
-const Card = ({ post }) => {
+const Card = ({ post, toggleUserPost }) => {
   let [following, setFollowing] = useState(post.isFollowed);
 
   // // const timestamp = user.timestamp;
@@ -51,6 +51,7 @@ const Card = ({ post }) => {
           onClick={() => {
             // console.log(following);
             setFollowing((prev) => !prev);
+            toggleUserPost(post);
             // console.log(following);
           }}
         >
