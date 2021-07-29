@@ -4,15 +4,13 @@ import "../App.css";
 import { useState, useEffect } from "react";
 
 const Card = ({ post }) => {
-  // let [putResponse, setPutResponse] = useState(null);
   let [following, setFollowing] = useState(post.isFollowed);
-  // console.log(post.isFollowed);
 
   // // const timestamp = user.timestamp;
   // // const timeStampReformat = timestamp.slice(2, 7);
 
   let putData = async () => {
-    let request = await fetch(".netlify/functions/follow", {
+    await fetch(".netlify/functions/follow", {
       method: "post",
       body: JSON.stringify({
         id: post.id,
@@ -20,21 +18,12 @@ const Card = ({ post }) => {
         isFollowed: following,
       }),
     });
-    let requestBody = await request.json();
-    console.log(requestBody);
-    // setPutResponse(requestBody);
-    // setFollowing(!following);
   };
-  // let toggleFollow = (followState) => {
-  //   if (followState) {
-  //     return false;
-  //   }
-  //   return true;
-  // };
 
-  // useEffect(() => {
-  //   toggleFollow();
-  // }, []);
+  useEffect(() => {
+    putData();
+    console.log("useeffect is ran");
+  });
 
   return (
     <div className="card">
@@ -57,12 +46,12 @@ const Card = ({ post }) => {
           </div>
         </div>
         <div
+          style={{ cursor: "pointer" }}
           className={following ? "followed-button" : "follow-button"}
           onClick={() => {
             // console.log(following);
             setFollowing((prev) => !prev);
             // console.log(following);
-            putData();
           }}
         >
           {following ? "Following" : "Follow"}
