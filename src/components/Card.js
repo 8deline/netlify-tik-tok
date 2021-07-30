@@ -19,7 +19,7 @@ const Card = ({ post, toggleUserPost }) => {
       }),
     });
   };
-
+  console.log("following " + following);
   useEffect(() => {
     putData();
     console.log("useeffect is ran");
@@ -59,7 +59,7 @@ const Card = ({ post, toggleUserPost }) => {
         </div>
       </div>
       {/* <div className="video-container"> */}
-      <video className="video" controls>
+      <video className="video" width="320" height="240" controls>
         <source src={post.video_posts} type="video/mp4" />
       </video>
       {/* <iframe

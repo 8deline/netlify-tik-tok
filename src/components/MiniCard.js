@@ -1,6 +1,29 @@
+import fetch from "node-fetch";
 import React from "react";
+import { useState, useEffect } from "react";
 
 const MiniCard = ({ user, toggleFollow }) => {
+  let [unFollowing, setUnFollowing] = useState(user.isFollowed);
+  const putData = async () => {
+    // console.log(user);
+
+    await fetch(".netlify/functions/follow", {
+      method: "post",
+      body: JSON.stringify({
+        id: user.id,
+        date_posted: user.date_posted,
+        isFollowed: unFollowing,
+      }),
+    });
+  };
+
+  useEffect(() => {
+    console.log("why is useeffect not run on the minicard");
+    putData();
+    // console.log(unFollowing);
+    // console.log("useeffectminicard");
+  }, []);
+
   return (
     <div className="section minicard">
       <div className="section">
@@ -15,14 +38,19 @@ const MiniCard = ({ user, toggleFollow }) => {
           <p>{user.name}</p>
         </div>
       </div>
-      {user.button_visible && (
+      {
         <div
-          className={user.is_followed ? "followed-button" : "follow-button"}
-          onClick={() => toggleFollow(user)}
+          style={{ cursor: "pointer" }}
+          className={unFollowing ? "followed-button" : "follow-button"}
+          onClick={() => {
+            putData();
+            setUnFollowing((prev) => !prev);
+            toggleFollow(user);
+          }}
         >
           {user.is_followed ? "Following" : "Follow"}
         </div>
-      )}
+      }
     </div>
   );
 };

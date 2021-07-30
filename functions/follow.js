@@ -27,9 +27,11 @@ exports.handler = async (event) => {
       "x-cassandra-token": process.env.TOKEN,
     },
   });
+
   const requestBody = await request.json();
-  // console.log(requestBody);
-  // console.log(requestBody.data.updateposts.value);
+  console.log("I am here");
+  console.log(requestBody);
+  console.log(requestBody.data.updateposts.value);
   return {
     statusCode: 200,
     body: JSON.stringify(requestBody.data.updateposts.value),

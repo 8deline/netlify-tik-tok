@@ -2,15 +2,13 @@ import fetch from "node-fetch";
 import { useState, useEffect } from "react";
 import FollowersColumn from "../components/FollowersColumn";
 import Card from "../components/Card";
+import MiniCard from "../components/MiniCard";
 
 const Home = () => {
   let [posts, setPosts] = useState(null);
   let [followingUsers, setFollowingUsers] = useState(null);
+  let [unfollowingUsers, setUnfollowingUsers] = useState(null);
   let [userToToggle, setUserToToggle] = useState(null);
-
-  // let [unfollowingUsers, setUnfollowingUsers] = useState(null);
-  // let [followUpdate, setFolowUpdate] = useState(false);
-  console.log(userToToggle);
 
   const fetchData = async () => {
     const response = await fetch(".netlify/functions/getPosts");
@@ -21,23 +19,16 @@ const Home = () => {
       (post) => post.isFollowed === true
     );
     setFollowingUsers(follow);
+    let unfollow = response_body.data.posts.values.filter(
+      (post) => post.isFollowed === false
+    );
+    setUnfollowingUsers(unfollow);
   };
-  // const resetFollowing = () => {
-  //   if (posts) {
-  //     let follow = posts.filter((post) => post.isFollowed === true);
-  //     setFollowingUsers(follow);
-  //   }
-  // };
+
   if (userToToggle) {
     fetchData();
     setUserToToggle(null);
   }
-
-  // let unfollow = response_body.data.posts.values.filter(
-  //   (post) => post.isFollowed === false
-  // );
-
-  // setUnfollowingUsers(unfollow);
 
   useEffect(() => {
     fetchData();
@@ -49,9 +40,9 @@ const Home = () => {
       <FollowersColumn following={followingUsers} />
       <div className="feed">
         {posts &&
-          posts.map((post) => (
+          posts.map((post, index) => (
             <Card
-              key={post.id}
+              key={index}
               post={post}
               toggleUserPost={(userToToggle) => setUserToToggle(userToToggle)}
             />
@@ -73,7 +64,18 @@ const Home = () => {
             </div>
           ))}
       </div> */}
-      <div className="suggested-box"></div>
+      <div className="suggested-box">
+        {unfollowingUsers &&
+          unfollowingUsers.map((unfollowingUser, index) => (
+            <MiniCard
+              key={index}
+              user={unfollowingUser}
+              toggleFollow={(userToToggle) => {
+                setUserToToggle(userToToggle);
+              }}
+            />
+          ))}
+      </div>
     </div>
   );
 };
