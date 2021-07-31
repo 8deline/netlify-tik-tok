@@ -9,22 +9,24 @@ const Card = ({ post, toggleUserPost }) => {
   // // const timestamp = user.timestamp;
   // // const timeStampReformat = timestamp.slice(2, 7);
 
-  let putData = async () => {
-    await fetch(".netlify/functions/follow", {
-      method: "post",
-      body: JSON.stringify({
-        id: post.id,
-        date_posted: post.date_posted,
-        isFollowed: following,
-      }),
-    });
-  };
-  console.log("following " + following);
-  useEffect(() => {
-    putData();
-    console.log("useeffect is ran");
-  });
+  // let putData = async () => {
+  //   await fetch(".netlify/functions/follow", {
+  //     method: "post",
+  //     body: JSON.stringify({
+  //       id: post.id,
+  //       date_posted: post.date_posted,
+  //       isFollowed: following,
+  //     }),
+  //   });
+  // };
 
+  // useEffect(() => {
+  //   putData();
+  // });
+  useEffect(() => {
+    console.log("card is rerendered");
+    console.log(following);
+  });
   return (
     <div className="card">
       <div className="break" />
@@ -47,15 +49,13 @@ const Card = ({ post, toggleUserPost }) => {
         </div>
         <div
           style={{ cursor: "pointer" }}
-          className={following ? "followed-button" : "follow-button"}
+          className={post.isFollowed ? "followed-button" : "follow-button"}
           onClick={() => {
-            // console.log(following);
-            setFollowing((prev) => !prev);
+            // setFollowing((prev) => !prev);
             toggleUserPost(post);
-            // console.log(following);
           }}
         >
-          {following ? "Following" : "Follow"}
+          {post.isFollowed ? "Following" : "Follow"}
         </div>
       </div>
       {/* <div className="video-container"> */}
