@@ -74,7 +74,9 @@ const Card = ({ post, toggleUserPost }) => {
         <div className="social-tag">{post.likes}</div>
         {/* <i class="far fa-comment-dots"></i> */}
         <i class="far fa-comments"></i>
-        <div className="social-tag">{post.comments_list.length}</div>
+        <div className="social-tag">
+          {post.comments_list ? post.comments_list.length : 0}
+        </div>
         <i class="far fa-share-square"></i>
       </div>
     </div>
